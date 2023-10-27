@@ -61,7 +61,7 @@ class Comment
     #[Assert\IsTrue(message: 'comment.is_spam')]
     public function isLegitComment(): bool
     {
-        $containsInvalidCharacters = null !== u($this->content)->indexOf('@');
+        $containsInvalidCharacters = u($this->content)->indexOf('@') !== null;
 
         return !$containsInvalidCharacters;
     }

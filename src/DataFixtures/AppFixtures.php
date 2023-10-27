@@ -53,7 +53,7 @@ final class AppFixtures extends Fixture
             $tag = new Tag($name);
 
             $manager->persist($tag);
-            $this->addReference('tag-'.$name, $tag);
+            $this->addReference('tag-' . $name, $tag);
         }
 
         $manager->flush();
@@ -78,7 +78,7 @@ final class AppFixtures extends Fixture
                 $comment = new Comment();
                 $comment->setAuthor($commentAuthor);
                 $comment->setContent($this->getRandomText(random_int(255, 512)));
-                $comment->setPublishedAt(new \DateTime('now + '.$i.'seconds'));
+                $comment->setPublishedAt(new \DateTime('now + ' . $i . 'seconds'));
 
                 $post->addComment($comment);
             }
@@ -132,14 +132,14 @@ final class AppFixtures extends Fixture
             // $postData = [$title, $slug, $summary, $content, $publishedAt, $author, $tags, $comments];
 
             /** @var User $user */
-            $user = $this->getReference(['jane_admin', 'tom_admin'][0 === $i ? 0 : random_int(0, 1)]);
+            $user = $this->getReference(['jane_admin', 'tom_admin'][$i === 0 ? 0 : random_int(0, 1)]);
 
             $posts[] = [
                 $title,
                 (string)$this->slugger->slug($title)->lower(),
                 $this->getRandomText(),
                 $this->getPostContent(),
-                (new \DateTime('now - '.$i.'days'))->setTime(random_int(8, 17), random_int(7, 49), random_int(0, 59)),
+                (new \DateTime('now - ' . $i . 'days'))->setTime(random_int(8, 17), random_int(7, 49), random_int(0, 59)),
                 // Ensure that the first post is written by Jane Doe to simplify tests
                 $user,
                 $this->getRandomTags(),
@@ -254,7 +254,7 @@ final class AppFixtures extends Fixture
 
         return array_map(function ($tagName) {
             /** @var Tag $tag */
-            $tag = $this->getReference('tag-'.$tagName);
+            $tag = $this->getReference('tag-' . $tagName);
 
             return $tag;
         }, $selectedTags);

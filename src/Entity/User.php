@@ -20,7 +20,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'blog_user')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -55,6 +54,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
+    /**
+     * @return array{int|null, string|null, string|null}
+     */
+    public function __serialize(): array
+    {
+        // add $this->salt too if you don't use Bcrypt or Argon2i
+        return [$this->id, $this->username, $this->password];
+    }
+
+    /**
+     * @param array{int|null, string, string} $data
+     */
+    public function __unserialize(array $data): void
+    {
+        // add $this->salt too if you don't use Bcrypt or Argon2i
+        [$this->id, $this->username, $this->password] = $data;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -72,7 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     public function getUsername(): string
@@ -151,23 +168,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // if you had a plainPassword property, you'd nullify it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * @return array{int|null, string|null, string|null}
-     */
-    public function __serialize(): array
-    {
-        // add $this->salt too if you don't use Bcrypt or Argon2i
-        return [$this->id, $this->username, $this->password];
-    }
-
-    /**
-     * @param array{int|null, string, string} $data
-     */
-    public function __unserialize(array $data): void
-    {
-        // add $this->salt too if you don't use Bcrypt or Argon2i
-        [$this->id, $this->username, $this->password] = $data;
     }
 }

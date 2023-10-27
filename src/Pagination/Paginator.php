@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the Symfony package.
@@ -55,7 +55,7 @@ final class Paginator
         /** @var array<string, mixed> $joinDqlParts */
         $joinDqlParts = $this->queryBuilder->getDQLPart('join');
 
-        if (0 === \count($joinDqlParts)) {
+        if (\count($joinDqlParts) === 0) {
             $query->setHint(CountWalker::HINT_DISTINCT, false);
         }
 
@@ -80,7 +80,7 @@ final class Paginator
 
     public function getLastPage(): int
     {
-        return (int) ceil($this->numResults / $this->pageSize);
+        return (int)ceil($this->numResults / $this->pageSize);
     }
 
     public function getPageSize(): int

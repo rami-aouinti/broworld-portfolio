@@ -33,6 +33,11 @@ class Tag implements \JsonSerializable
         $this->name = $name;
     }
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,11 +49,6 @@ class Tag implements \JsonSerializable
     }
 
     public function jsonSerialize(): string
-    {
-        return $this->name;
-    }
-
-    public function __toString(): string
     {
         return $this->name;
     }

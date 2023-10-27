@@ -21,7 +21,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\Table(name: 'blog_post')]
 #[UniqueEntity(fields: ['slug'], message: 'post.slug_unique', errorPath: 'title')]
@@ -60,7 +59,9 @@ class Post
      * @var Collection<int, Comment>
      */
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, cascade: ['persist'], orphanRemoval: true)]
-    #[ORM\OrderBy(['publishedAt' => 'DESC'])]
+    #[ORM\OrderBy([
+        'publishedAt' => 'DESC',
+    ])]
     private Collection $comments;
 
     /**
@@ -68,7 +69,9 @@ class Post
      */
     #[ORM\ManyToMany(targetEntity: Tag::class, cascade: ['persist'])]
     #[ORM\JoinTable(name: 'blog_post_tag')]
-    #[ORM\OrderBy(['name' => 'ASC'])]
+    #[ORM\OrderBy([
+        'name' => 'ASC',
+    ])]
     #[Assert\Count(max: 4, maxMessage: 'post.too_many_tags')]
     private Collection $tags;
 
