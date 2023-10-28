@@ -8,11 +8,12 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Tag;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\String\AbstractUnicodeString;
 use Symfony\Component\String\Slugger\SluggerInterface;
+
 use function Symfony\Component\String\u;
 
 final class AppFixtures extends Fixture
@@ -59,6 +60,9 @@ final class AppFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @throws \Exception
+     */
     private function loadPosts(ObjectManager $manager): void
     {
         foreach ($this->getPostData() as [$title, $slug, $summary, $content, $publishedAt, $author, $tags]) {
@@ -78,7 +82,7 @@ final class AppFixtures extends Fixture
                 $comment = new Comment();
                 $comment->setAuthor($commentAuthor);
                 $comment->setContent($this->getRandomText(random_int(255, 512)));
-                $comment->setPublishedAt(new \DateTime('now + ' . $i . 'seconds'));
+                $comment->setPublishedAt(new DateTime('now + ' . $i . 'seconds'));
 
                 $post->addComment($comment);
             }
@@ -123,7 +127,6 @@ final class AppFixtures extends Fixture
     /**
      * @throws \Exception
      *
-     * @return array<int, array{0: string, 1: AbstractUnicodeString, 2: string, 3: string, 4: \DateTime, 5: User, 6: array<Tag>}>
      */
     private function getPostData(): array
     {
@@ -139,7 +142,13 @@ final class AppFixtures extends Fixture
                 (string)$this->slugger->slug($title)->lower(),
                 $this->getRandomText(),
                 $this->getPostContent(),
-                (new \DateTime('now - ' . $i . 'days'))->setTime(random_int(8, 17), random_int(7, 49), random_int(0, 59)),
+                (new DateTime(
+                    'now - ' . $i . 'days'
+                ))->setTime(
+                    random_int(8, 17),
+                    random_int(7, 49),
+                    random_int(0, 59)
+                ),
                 // Ensure that the first post is written by Jane Doe to simplify tests
                 $user,
                 $this->getRandomTags(),
