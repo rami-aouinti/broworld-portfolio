@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  * This file is part of the Symfony package.
@@ -15,7 +17,6 @@ use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TemplateWrapper;
 use Twig\TwigFunction;
-use function Symfony\Component\String\u;
 
 /**
  * CAUTION: this is an extremely advanced Twig extension. It's used to get the
@@ -73,10 +74,6 @@ final class SourceCodeExtension extends AbstractExtension
 
         /** @var string $fileName */
         $fileName = $method->getFileName();
-
-        if (false === $classCode = file($fileName)) {
-            throw new \LogicException(sprintf('There was an error while trying to read the contents of the "%s" file.', $fileName));
-        }
 
         $startLine = $method->getStartLine() - 1;
         $endLine = $method->getEndLine();

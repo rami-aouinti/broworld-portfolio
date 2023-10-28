@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  * This file is part of the Symfony package.
@@ -14,6 +16,7 @@ namespace App\Form\DataTransformer;
 use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Symfony\Component\Form\DataTransformerInterface;
+
 use function Symfony\Component\String\u;
 
 /**
