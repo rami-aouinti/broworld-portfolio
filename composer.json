@@ -85,6 +85,7 @@
 		"symfony/twig-bundle": "<3.3"
 	},
 	"require-dev": {
+		"dama/doctrine-test-bundle": "^7.0",
 		"bamarni/composer-bin-plugin": "^1.8",
 		"doctrine/doctrine-fixtures-bundle": "^3.4",
 		"systemsdk/easy-log-bundle": "2.0.*",
