@@ -118,9 +118,6 @@ final class DeleteUserCommand extends Command
             throw new RuntimeException(sprintf('User with username "%s" not found.', $username));
         }
 
-        // After an entity has been removed, its in-memory state is the same
-        // as before the removal, except for generated identifiers.
-        // See https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/working-with-objects.html#removing-entities
         $userId = $user->getId();
 
         $this->entityManager->remove($user);
@@ -129,7 +126,12 @@ final class DeleteUserCommand extends Command
         $userUsername = $user->getUsername();
         $userEmail = $user->getEmail();
 
-        $this->io->success(sprintf('User "%s" (ID: %d, email: %s) was successfully deleted.', $userUsername, $userId, $userEmail));
+        $this->io->success(sprintf(
+            'User "%s" (ID: %d, email: %s) was successfully deleted.',
+            $userUsername,
+            $userId,
+            $userEmail
+        ));
 
         // Logging is helpful and important to keep a trace of what happened in the software runtime flow.
         // See https://symfony.com/doc/current/logging.html

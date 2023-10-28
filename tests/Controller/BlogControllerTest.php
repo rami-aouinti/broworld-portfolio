@@ -101,6 +101,9 @@ final class BlogControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertCount(1, $crawler->filter('article.post'));
-        $this->assertSame('Lorem ipsum dolor sit amet consectetur adipiscing elit', $crawler->filter('article.post')->first()->filter('h2 > a')->text());
+        $this->assertSame(
+            'Lorem ipsum dolor sit amet consectetur adipiscing elit',
+            $crawler->filter('article.post')->first()->filter('h2 > a')->text()
+        );
     }
 }

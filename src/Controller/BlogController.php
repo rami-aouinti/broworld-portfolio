@@ -58,8 +58,13 @@ final class BlogController extends AbstractController
         '_format' => 'html',
     ], methods: ['GET'])]
     #[Cache(smaxage: 10)]
-    public function index(Request $request, int $page, string $_format, PostRepository $posts, TagRepository $tags): Response
-    {
+    public function index(
+        Request $request,
+        int $page,
+        string $_format,
+        PostRepository $posts,
+        TagRepository $tags
+    ): Response {
         $tag = null;
         if ($request->query->has('tag')) {
             $tag = $tags->findOneBy([

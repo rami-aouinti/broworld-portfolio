@@ -105,7 +105,12 @@ final class AddUserCommand extends Command
      */
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
-        if ($input->getArgument('username') !== null && $input->getArgument('password') !== null && $input->getArgument('email') !== null && $input->getArgument('full-name') !== null) {
+        if (
+            $input->getArgument('username') !== null &&
+            $input->getArgument('password') !== null &&
+            $input->getArgument('email') !== null &&
+            $input->getArgument('full-name') !== null
+        ) {
             return;
         }
 
@@ -135,7 +140,10 @@ final class AddUserCommand extends Command
         if ($password !== null) {
             $this->io->text(' > <info>Password</info>: ' . u('*')->repeat(u($password)->length()));
         } else {
-            $password = $this->io->askHidden('Password (your type will be hidden)', $this->validator->validatePassword(...));
+            $password = $this->io->askHidden(
+                'Password (your type will be hidden)',
+                $this->validator->validatePassword(...)
+            );
             $input->setArgument('password', $password);
         }
 
@@ -198,11 +206,21 @@ final class AddUserCommand extends Command
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $this->io->success(sprintf('%s was successfully created: %s (%s)', $isAdmin ? 'Administrator user' : 'User', $user->getUsername(), $user->getEmail()));
+        $this->io->success(sprintf(
+            '%s was successfully created: %s (%s)',
+            $isAdmin ? 'Administrator user' : 'User',
+            $user->getUsername(),
+            $user->getEmail()
+        ));
 
         $event = $stopwatch->stop('add-user-command');
         if ($output->isVerbose()) {
-            $this->io->comment(sprintf('New user database id: %d / Elapsed time: %.2f ms / Consumed memory: %.2f MB', $user->getId(), $event->getDuration(), $event->getMemory() / (1024 ** 2)));
+            $this->io->comment(sprintf(
+                'New user database id: %d / Elapsed time: %.2f ms / Consumed memory: %.2f MB',
+                $user->getId(),
+                $event->getDuration(),
+                $event->getMemory() / (1024 ** 2)
+            ));
         }
 
         return Command::SUCCESS;
@@ -216,7 +234,10 @@ final class AddUserCommand extends Command
         ]);
 
         if ($existingUser !== null) {
-            throw new RuntimeException(sprintf('There is already a user registered with the "%s" username.', $username));
+            throw new RuntimeException(sprintf(
+                'There is already a user registered with the "%s" username.',
+                $username
+            ));
         }
 
         // validate password and email if is not this input means interactive.

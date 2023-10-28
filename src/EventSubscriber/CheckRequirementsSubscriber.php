@@ -16,12 +16,15 @@ namespace App\EventSubscriber;
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+
+use function extension_loaded;
 
 /**
  * This application uses by default an SQLite database to store its information.
@@ -60,12 +63,20 @@ final class CheckRequirementsSubscriber implements EventSubscriberInterface
      */
     public function handleConsoleError(ConsoleErrorEvent $event): void
     {
-        $commandNames = ['doctrine:fixtures:load', 'doctrine:database:create', 'doctrine:schema:create', 'doctrine:database:drop'];
+        $commandNames = [
+            'doctrine:fixtures:load',
+            'doctrine:database:create',
+            'doctrine:schema:create',
+            'doctrine:database:drop'
+        ];
 
         if ($event->getCommand() && \in_array($event->getCommand()->getName(), $commandNames, true)) {
-            if ($this->isSQLitePlatform() && !\extension_loaded('sqlite3')) {
+            if ($this->isSQLitePlatform() && !extension_loaded('sqlite3')) {
                 $io = new SymfonyStyle($event->getInput(), $event->getOutput());
-                $io->error('This command requires to have the "sqlite3" PHP extension enabled because, by default, the Symfony Demo application uses SQLite to store its information.');
+                $io->error(
+                    'This command requires to have the "sqlite3" PHP extension enabled because, by default, the Symfony
+                     Demo application uses SQLite to store its information.'
+                );
             }
         }
     }
@@ -85,8 +96,11 @@ final class CheckRequirementsSubscriber implements EventSubscriberInterface
         $isDriverException = ($exception instanceof DriverException || $previousException instanceof DriverException);
 
         // Check if SQLite is enabled
-        if ($isDriverException && $this->isSQLitePlatform() && !\extension_loaded('sqlite3')) {
-            $event->setThrowable(new \Exception('PHP extension "sqlite3" must be enabled because, by default, the Symfony Demo application uses SQLite to store its information.'));
+        if ($isDriverException && $this->isSQLitePlatform() && !extension_loaded('sqlite3')) {
+            $event->setThrowable(new Exception(
+                'PHP extension "sqlite3" must be enabled because, by default,
+             the Symfony Demo application uses SQLite to store its information.'
+            ));
         }
     }
 

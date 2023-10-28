@@ -13,10 +13,17 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
+use Closure;
+use ReflectionFunction;
+use ReflectionMethod;
+use ReflectionObject;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TemplateWrapper;
 use Twig\TwigFunction;
+
+use function is_array;
+use function is_object;
 
 /**
  * CAUTION: this is an extremely advanced Twig extension. It's used to get the
@@ -79,6 +86,7 @@ final class SourceCodeExtension extends AbstractExtension
         $endLine = $method->getEndLine();
 
         while ($startLine > 0) {
+            $classCode = [];
             $line = trim($classCode[$startLine - 1]);
 
             if (\in_array($line, ['{', '}', ''], true)) {
@@ -104,17 +112,17 @@ final class SourceCodeExtension extends AbstractExtension
      */
     private function getCallableReflector(callable $callable): \ReflectionFunctionAbstract
     {
-        if (\is_array($callable)) {
-            return new \ReflectionMethod($callable[0], $callable[1]);
+        if (is_array($callable)) {
+            return new ReflectionMethod($callable[0], $callable[1]);
         }
 
-        if (\is_object($callable) && !$callable instanceof \Closure) {
-            $r = new \ReflectionObject($callable);
+        if (is_object($callable) && !$callable instanceof Closure) {
+            $res = new ReflectionObject($callable);
 
-            return $r->getMethod('__invoke');
+            return $res->getMethod('__invoke');
         }
 
-        return new \ReflectionFunction($callable);
+        return new ReflectionFunction($callable);
     }
 
     /**
