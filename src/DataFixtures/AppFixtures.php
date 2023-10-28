@@ -123,7 +123,6 @@ final class AppFixtures extends Fixture
 
     /**
      * @throws \Exception
-     *
      */
     private function getPostData(): array
     {

@@ -67,7 +67,7 @@ final class CheckRequirementsSubscriber implements EventSubscriberInterface
             'doctrine:fixtures:load',
             'doctrine:database:create',
             'doctrine:schema:create',
-            'doctrine:database:drop'
+            'doctrine:database:drop',
         ];
 
         if ($event->getCommand() && \in_array($event->getCommand()->getName(), $commandNames, true)) {
