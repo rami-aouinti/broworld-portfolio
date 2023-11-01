@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_auth.html.twig' %}
 
 {% block body_id 'login' %}
 
-{% block main %}
+{% block body %}
     {% if error %}
         <div class="alert alert-danger">
             {{ error.messageKey|trans(error.messageData, 'security') }}
@@ -16,96 +16,30 @@
         More info on Symfony UX https://ux.symfony.com
     #}
     <div class="row" {{ stimulus_controller('login') }}{# @see assets/controllers/login-controller.js #}>
-        <div class="col-sm-5">
-            <div class="jumbotron">
-                <form action="{{ path('security_login') }}" method="post">
-                    <fieldset>
-                        <legend><i class="fa fa-lock" aria-hidden="true"></i> {{ 'title.login'|trans }}</legend>
-                        <div class="form-group">
-                            <label for="username">{{ 'label.username'|trans }}</label>
-                            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" {{ stimulus_target('login', 'username') }} />
-                        </div>
+                <form action="{{ path('security_login') }}" role="form" method="post" class="text-start">
+                    <div class="input-group input-group-outline my-3">
+                        <label for="username" class="form-label">{{ 'label.username'|trans }}</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" {{ stimulus_target('login', 'username') }} />
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                        <label for=password"" class="form-label">{{ 'label.password'|trans }}</label>
+                        <input type="password" id="password" name="_password" class="form-control" {{ stimulus_target('login', 'password') }} />
+                    </div>
 
-                        <div class="form-group form-group-password">
-                            <label for="password">{{ 'label.password'|trans }}</label>
-                            <input type="password" id="password" name="_password" class="form-control" {{ stimulus_target('login', 'password') }} />
-                            <button class="btn btn-primary pull-right" type="button" {{ stimulus_action('login', 'togglePasswordInputType') }}><i class="fa fa-eye"></i></button>
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" name="_remember_me" checked/>
-                                Keep me logged in
-                            </label>
-                        </div>
-                        <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}
-                        </button>
-                    </fieldset>
+                    <div class="form-check form-switch d-flex align-items-center mb-3">
+                        <input class="form-check-input" type="checkbox" id="rememberMe" checked>
+                        <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
+                    </div>
+                    <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    <div class="text-center">
+                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2"> {{ 'action.sign_in'|trans }}</button>
+                    </div>
+                    <p class="mt-4 text-sm text-center">
+                        Don't have an account?
+                        <a href="../pages/sign-up.html" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    </p>
                 </form>
-            </div>
-        </div>
-
-        <div id="login-help" class="col-sm-7">
-            <h3>
-                <i class="hidden-xs fa fa-long-arrow-left" aria-hidden="true"></i>
-                {{ 'help.login_users'|trans }}
-            </h3>
-
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">{{ 'label.username'|trans }}</th>
-                        <th scope="col">{{ 'label.password'|trans }}</th>
-                        <th scope="col">{{ 'label.role'|trans }}</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>john_user</td>
-                        <td>kitten</td>
-                        <td><code>ROLE_USER</code> ({{ 'help.role_user'|trans }})</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" {{ stimulus_action('login', 'prefillJohnUser') }}><i class="fa fa-user"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>jane_admin</td>
-                        <td>kitten</td>
-                        <td><code>ROLE_ADMIN</code> ({{ 'help.role_admin'|trans }})</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" {{ stimulus_action('login', 'prefillJaneAdmin') }}><i class="fa fa-user"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div id="login-users-help" class="panel panel-default">
-                <div class="panel-body">
-                    <p>
-                        <span class="badge badge-success">{{ 'note'|trans }}</span>
-                        {{ 'help.reload_fixtures'|trans }}<br/>
-
-                        <code class="console">$ php bin/console doctrine:fixtures:load</code>
-                    </p>
-
-                    <p>
-                        <span class="badge badge-success">{{ 'tip'|trans }}</span>
-                        {{ 'help.add_user'|trans }}<br/>
-
-                        <code class="console">$ php bin/console app:add-user</code>
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
-{% endblock %}
 
-{% block sidebar %}
-    {{ parent() }}
-
-    {{ show_source_code(_self) }}
 {% endblock %}

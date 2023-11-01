@@ -1,0 +1,13 @@
+{% extends 'base:admin.html.twig' %}
+
+{% block title %}Edit Hobby{% endblock %}
+
+{% block body %}
+    <h1>Edit Hobby</h1>
+
+    {{ include('back_office/hobby/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_hobby_index') }}">back to list</a>
+
+    {{ include('back_office/hobby/_delete_form.html.twig') }}
+{% endblock %}

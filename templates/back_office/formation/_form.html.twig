@@ -1,0 +1,30 @@
+{{ form_start(form) }}
+<div class="card">
+    <div class="card-header">{{ title }}</div>
+    <div class="card-body">
+        {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-6">
+                {{ form_row(form.name) }}
+            </div>
+            <div class="col-6">
+                {{ form_row(form.school) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(form.gradeLevel) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(form.startedAt) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(form.endedAt) }}
+            </div>
+        </div>
+        {{ form_row(form.description) }}
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <a href="{{ path("formation_manage") }}" class="btn btn-secondary">Retour</a>
+        <button class="btn btn-primary">{{ action }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

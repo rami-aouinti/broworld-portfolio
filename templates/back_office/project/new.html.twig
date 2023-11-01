@@ -1,0 +1,11 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Project{% endblock %}
+
+{% block body %}
+    <h1>Create new Project</h1>
+
+    {{ include('back_office/project/_form.html.twig') }}
+
+    <a href="{{ path('app_project_index') }}">back to list</a>
+{% endblock %}

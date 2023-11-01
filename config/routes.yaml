@@ -4,7 +4,7 @@ homepage:
     requirements:
         _locale: '%app_locales%'
     defaults:
-        template: default/homepage.html.twig
+        template: front_office/home.html.twig
         _locale: '%locale%'
 
 controllers:
@@ -18,3 +18,8 @@ controllers:
     defaults:
         _locale: '%locale%'
 
+api-controllers:
+    resource:
+        path: '../src/Controller/API/'
+        namespace: App\Controller\API
+    type: attribute

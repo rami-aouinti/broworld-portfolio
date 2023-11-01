@@ -1,0 +1,47 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Experience index{% endblock %}
+
+{% block body %}
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="h4">Experiences</h1>
+                <a href="{{ path('app_experience_new') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            </div>
+            <table class="table table-striped table-hovered mb-0">
+                <thead>
+                <tr>
+                    <th class="text-center text-uppercase">Title</th>
+                    <th class="text-center text-uppercase">Company</th>
+                    <th class="text-center text-uppercase">StartedAt</th>
+                    <th class="text-center text-uppercase">EndedAt</th>
+                    <th class="text-center text-uppercase">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for experience in experiences %}
+                    <tr>
+                        <td class="text-center align-middle">{{ experience.title|slice(0, 30) }}</td>
+                        <td class="text-center align-middle">{{ experience.company|slice(0, 20) }}</td>
+                        <td class="text-center align-middle">{{ experience.startedAt| date('Y-m-d') }}</td>
+                        <td class="text-center align-middle">{{ experience.endedAt| date('Y-m-d') }}</td>
+                        <td class="text-center align-middle">
+                            <a href="{{ path('app_experience_show', {'id': experience.id}) }}" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                            <a href="{{ path('app_experience_edit', {'id': experience.id}) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('app_experience_edit', {'id': experience.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

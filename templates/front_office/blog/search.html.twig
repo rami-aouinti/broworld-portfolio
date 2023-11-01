@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'blog_search' %}
+
+{% block body %}
+    {{ component('blog_search', {
+        query: query
+    }) }}
+{% endblock %}

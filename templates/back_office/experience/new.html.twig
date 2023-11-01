@@ -1,0 +1,17 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Experience{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">New Experience</div>
+            <div class="card-body">
+                {{ include('back_office/experience/_form.html.twig') }}
+            </div>
+            <a href="{{ path('app_experience_index') }}">back to list</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -97,7 +97,7 @@ final class AppFixtures extends Fixture
     {
         return [
             // $userData = [$fullname, $username, $password, $email, $roles];
-            ['Jane Doe', 'jane_admin', 'kitten', 'jane_admin@symfony.com', [User::ROLE_ADMIN]],
+            ['Rami Aouinti', 'rami_aouinti', '19891989aA!', 'rami.aouinti@gmail.com', [User::ROLE_ADMIN]],
             ['Tom Doe', 'tom_admin', 'kitten', 'tom_admin@symfony.com', [User::ROLE_ADMIN]],
             ['John Doe', 'john_user', 'kitten', 'john_user@symfony.com', [User::ROLE_USER]],
         ];
@@ -131,7 +131,7 @@ final class AppFixtures extends Fixture
             // $postData = [$title, $slug, $summary, $content, $publishedAt, $author, $tags, $comments];
 
             /** @var User $user */
-            $user = $this->getReference(['jane_admin', 'tom_admin'][$i === 0 ? 0 : random_int(0, 1)]);
+            $user = $this->getReference(['rami_aouinti', 'tom_admin'][$i === 0 ? 0 : random_int(0, 1)]);
 
             $posts[] = [
                 $title,

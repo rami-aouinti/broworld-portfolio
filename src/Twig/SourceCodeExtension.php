@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the Symfony package.
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ * (c) Rami Aouinti <rami.aouinti@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Twig;
 
 use Closure;
+use LogicException;
 use ReflectionFunction;
 use ReflectionMethod;
 use ReflectionObject;
@@ -22,18 +23,13 @@ use Twig\Extension\AbstractExtension;
 use Twig\TemplateWrapper;
 use Twig\TwigFunction;
 
+use function array_slice;
+use function count;
+use function in_array;
 use function is_array;
 use function is_object;
+use function Symfony\Component\String\u;
 
-/**
- * CAUTION: this is an extremely advanced Twig extension. It's used to get the
- * source code of the controller and the template used to render the current
- * page. If you are starting with Symfony, don't look at this code and consider
- * studying instead the code of the src/Twig/AppExtension.php extension.
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
- */
 final class SourceCodeExtension extends AbstractExtension
 {
     /**
@@ -49,10 +45,14 @@ final class SourceCodeExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('show_source_code', [$this, 'showSourceCode'], [
-                'is_safe' => ['html'],
-                'needs_environment' => true,
-            ]),
+            new TwigFunction(
+                'show_source_code',
+                [$this, 'showSourceCode'],
+                [
+                    'is_safe' => ['html'],
+                    'needs_environment' => true,
+                ]
+            ),
         ];
     }
 
@@ -81,22 +81,28 @@ final class SourceCodeExtension extends AbstractExtension
 
         /** @var string $fileName */
         $fileName = $method->getFileName();
+        $classCode = file($fileName);
+        if (!$classCode) {
+            throw new LogicException(sprintf(
+                'There was an error while trying to read the contents of the "%s" file.',
+                $fileName
+            ));
+        }
 
         $startLine = $method->getStartLine() - 1;
         $endLine = $method->getEndLine();
 
         while ($startLine > 0) {
-            $classCode = [];
             $line = trim($classCode[$startLine - 1]);
 
-            if (\in_array($line, ['{', '}', ''], true)) {
+            if (in_array($line, ['{', '}', ''], true)) {
                 break;
             }
 
             $startLine--;
         }
 
-        $controllerCode = implode('', \array_slice($classCode, $startLine, $endLine - $startLine));
+        $controllerCode = implode('', array_slice($classCode, $startLine, $endLine - $startLine));
 
         return [
             'file_path' => $fileName,
@@ -147,8 +153,22 @@ final class SourceCodeExtension extends AbstractExtension
      * Utility method that "unindents" the given $code when all its lines start
      * with a tabulation of four white spaces.
      */
-    private function unindentCode(string $code)
+    private function unindentCode(string $code): string
     {
+        $codeLines = u($code)->split("\n");
+
+        $indentedOrBlankLines = array_filter($codeLines, static function ($lineOfCode) {
+            return u($lineOfCode)->isEmpty() || u($lineOfCode)->startsWith('    ');
+        });
+
+        $codeIsIndented = count($indentedOrBlankLines) === count($codeLines);
+        if ($codeIsIndented) {
+            $unindentedLines = array_map(static function ($lineOfCode) {
+                return u($lineOfCode)->after('    ');
+            }, $codeLines);
+            $code = u("\n")->join($unindentedLines)->toString();
+        }
+
         return $code;
     }
 }

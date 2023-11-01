@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'blog_index' %}
+
+{% block body %}
+<div class="page-content">
+    <div>
+        <div class="profile-page">
+            <div class="wrapper">
+                <div class="page-header-blog" filter-color="orange">
+                    <div class="page-header-image" data-parallax="true" style="background-image: url('{{ asset('images/rami_back.jpeg') }}');"></div>
+                    <div class="container">
+                        <div class="content-center">
+                            <div class="h2 title">
+                                Blog
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="reference">
+            <div class="container cc-reference">
+                {% for post in paginator.results %}
+                    {{ include('front_office/blog/_post.html.twig') }}
+                {% else %}
+                    <div class="jumbotron">{{ 'post.no_posts_found'|trans }}</div>
+                {% endfor %}
+
+                {% if paginator.hasToPaginate %}
+
+                    <div class="navigation text-center">
+                        <ul class="pagination pagination-lg">
+                            {% if paginator.hasPreviousPage %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ path('blog_index_paginated', {page: paginator.previousPage, tag: tagName}) }}" rel="previous">
+                                        <i class="fa fw fa-long-arrow-left"></i> {{ 'paginator.previous'|trans }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link"><i class="fa fw fa-arrow-left"></i> {{ 'paginator.previous'|trans }}</span>
+                                </li>
+                            {% endif %}
+
+                            {% for i in 1..paginator.lastPage %}
+                                {% if i == paginator.currentPage %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ i }} <span class="sr-only">{{ 'paginator.current'|trans }}</span></span>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="{{ path('blog_index_paginated', {page: i, tag: tagName}) }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if paginator.hasNextPage %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ path('blog_index_paginated', {page: paginator.nextPage, tag: tagName}) }}">
+                                        <span>{{ 'paginator.next'|trans }} <i class="fa fw fa-long-arrow-right"></i></span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">{{ 'paginator.next'|trans }} <i class="fa fw fa-long-arrow-right"></i></span>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

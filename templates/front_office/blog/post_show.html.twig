@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'blog_post_show' %}
+
+{% block body %}
+<div class="page-content">
+    <div>
+        <div class="profile-page">
+            <div class="wrapper">
+                <div class="page-header-blog" filter-color="orange">
+                    <div class="page-header-image" data-parallax="true" style="background-image: url('{{ asset('images/rami_back.jpeg') }}')"></div>
+                    <div class="container">
+                        <div class="content-center">
+                            <div class="h2 title">
+                                Blog
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="reference">
+            <div class="container cc-reference">
+                <div class="card" data-aos="zoom-in">
+                <h1>{{ post.title }}</h1>
+
+                <p class="post-metadata">
+                    <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt|format_datetime('long', 'medium', '', 'UTC') }}</span>
+                    <span class="metadata"><i class="fa fa-user"></i> {{ post.author.fullName }}</span>
+                </p>
+
+                {{ post.content|markdown_to_html|sanitize_html }}
+
+                {{ include('front_office/blog/_post_tags.html.twig') }}
+
+                <div id="post-add-comment" class="jumbotron">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {{ render(controller('App\\Controller\\BlogController::commentForm', {'id': post.id})) }}
+                    {% else %}
+                        <p>
+                            <a class="btn btn-success" href="{{ path('security_login', {'redirect_to': app.request.pathInfo}) }}">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}
+                            </a>
+                            {{ 'post.to_publish_a_comment'|trans }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <h3>
+                    <i class="fa fa-comments" aria-hidden="true"></i> {{ 'post.num_comments'|trans({ 'count': post.comments|length }) }}
+                </h3>
+
+                {% for comment in post.comments %}
+                    <div class="row post-comment">
+                        <a name="comment_{{ comment.id }}"></a>
+                        <h4 class="col-sm-3">
+                            <strong>{{ comment.author.fullName }}</strong> {{ 'post.commented_on'|trans }}
+                            <strong>{{ comment.publishedAt|format_datetime('medium', 'short', '', 'UTC') }}</strong>
+                        </h4>
+                        <div class="col-sm-9">
+                            {{ comment.content|markdown_to_html|sanitize_html }}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="post-comment">
+                        <p>{{ 'post.no_comments'|trans }}</p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -262,6 +262,10 @@ else
 	$(ERROR_ONLY_FOR_HOST)
 endif
 
+clean: ## Runs all migrations for main database
+	@make exec cmd="php bin/console cache:clear"
+
+
 drop-migrate: ## Drops databases and runs all migrations for the main/test databases
 	@make exec cmd="php bin/console doctrine:schema:drop --full-database --force"
 	@make exec cmd="php bin/console doctrine:schema:drop --full-database --force --env=test"

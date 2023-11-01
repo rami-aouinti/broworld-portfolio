@@ -1,0 +1,69 @@
+<header>
+    <div class="profile-page sidebar-collapse">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-transparent bg-primary" color-on-scroll="400">
+            <div class="container">
+                <div class="navbar-translate"><a class="navbar-brand" href="{{ path('homepage') }}" rel="tooltip">Ramy World</a>
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span></button>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience">Experience</a></li>
+                        <li class="nav-item"><a class="nav-link smooth-scroll" href="#language">Language</a></li>
+                        <li class="nav-item"><a class="nav-link smooth-scroll" href="#hobby">Hobby</a></li>
+                        <li class="nav-item{{ _route == 'blog_index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ path('blog_index') }}">Blog</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contact</a></li>
+                        {% block header_navigation_links %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('admin_post_index') }}">
+                                        <i class="fa fa-lock" aria-hidden="true"></i> {{ 'menu.admin'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endblock %}
+
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="modal" data-target="#locale-selector-modal" role="button" id="locales">
+                                <i class="fa fa-solid fa-globe" aria-hidden="true"></i>
+                                <span class="caret"></span>
+                                <span class="sr-only">{{ 'menu.choose_language'|trans }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<div id="locale-selector-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-lg modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title" lang="en">
+                    {# display this title always in English to make the language selector easier to use #}
+                    Choose your language
+                </p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <ul style="list-style-type: none;">
+                    {% for locale in locales() %}
+                        {% set is_active = app.request.locale == locale.code %}
+                        {% set is_rtl = locale.code in ['ar', 'fa', 'he'] %}
+                        <a class="stretched-link" lang="{{ locale.code }}" hreflang="{{ locale.code }}" href="{{ path(app.request.get('_route', 'blog_index'), app.request.get('_route_params', [])|merge({_locale: locale.code})) }}">
+                            <li><img src="{{ asset('portfolio/flags/country-flags/svg/' ~  locale.code  ~ '.svg') }}" alt="Country flag" style="width: 30px; height: 20px"></li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,8 @@ parameters:
     locale: 'en'
     app_locales: ar|en|fr|de
     app.notifications.email_sender: anonymous@example.com
+    uploadDir: 'uploads'
+    uploadAbsoluteDir: '%kernel.project_dir%/public/%uploadDir%'
 
 services:
     # default configuration for services in *this* file
@@ -17,6 +19,8 @@ services:
             string $locales: '%app_locales%'
             string $defaultLocale: '%locale%'
             string $emailSender: '%app.notifications.email_sender%'
+            $uploadDir: '%uploadDir%'
+            $uploadAbsoluteDir: '%uploadAbsoluteDir%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -29,10 +33,21 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
+    App\EntityListener\:
+        resource: '../src/EntityListener'
+        tags: [ 'doctrine.orm.entity_listener' ]
+
     App\EventSubscriber\CommentNotificationSubscriber:
         $sender: '%app.notifications.email_sender%'
 
     Symfony\Component\Security\Http\Logout\LogoutUrlGenerator: '@security.logout_url_generator'
+
+    App\Form\Type\IconChoiceType:
+        class: App\Form\Type\IconChoiceType
+        # Symfony has already a container parameter to the kernel root directory.
+        arguments: [ '%kernel.project_dir%' ]
+        tags:
+            - { name: form.type }
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
