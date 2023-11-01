@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
-#[ORM\Table(name: 'skill')]
+#[ORM\Table(name: 'resume_skill')]
 class Skill
 {
     #[ORM\Id]

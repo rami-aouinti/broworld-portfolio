@@ -19,15 +19,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Class Media
- * @package App\Entity
- * @ORM\Entity
- * @ORM\EntityListeners({"App\EntityListener\MediaListener"})
- */
 #[ORM\Entity]
 #[ORM\EntityListeners(['App\EntityListener\MediaListener'])]
-#[ORM\Table(name: 'media')]
+#[ORM\Table(name: 'resume_media')]
 class Media
 {
     #[ORM\Id]

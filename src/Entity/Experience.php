@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
+#[ORM\Table(name: 'blog_comment')]
 class Experience
 {
     #[ORM\Id]

@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
-#[ORM\Table(name: 'formation')]
+#[ORM\Table(name: 'resume_formation')]
 class Formation
 {
     #[ORM\Id]
