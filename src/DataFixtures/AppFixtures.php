@@ -97,7 +97,7 @@ final class AppFixtures extends Fixture
     {
         return [
             // $userData = [$fullname, $username, $password, $email, $roles];
-            ['Rami Aouinti', 'rami_aouinti', '19891989aA!', 'rami.aouinti@gmail.com', [User::ROLE_ADMIN]],
+            ['Rami Aouinti', 'rami_aouinti', 'test', 'rami.aouinti@gmail.com', [User::ROLE_ADMIN]],
             ['Tom Doe', 'tom_admin', 'kitten', 'tom_admin@symfony.com', [User::ROLE_ADMIN]],
             ['John Doe', 'john_user', 'kitten', 'john_user@symfony.com', [User::ROLE_USER]],
         ];
