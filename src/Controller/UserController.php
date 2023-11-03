@@ -15,7 +15,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ChangePasswordType;
-use App\Form\UserType;
+use App\Form\UserType1;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +43,7 @@ final class UserController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
     ): Response {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType1::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,7 +77,7 @@ final class UserController extends AbstractController
             return $this->redirect($logoutUrlGenerator->getLogoutPath());
         }
 
-        return $this->render('user/change_password.html.twig', [
+        return $this->render('back_office/user/change_password.html.twig', [
             'form' => $form,
         ]);
     }
