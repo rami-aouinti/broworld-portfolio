@@ -442,6 +442,38 @@
                 <source>paginator.current</source>
                 <target>(الحالى)</target>
             </trans-unit>
+            <trans-unit id="home.basic_information">
+                <source>home.basic_information</source>
+                <target>Basic Information</target>
+            </trans-unit>
+            <trans-unit id="home.birthday">
+                <source>home.birthday</source>
+                <target>BIRTHDAY</target>
+            </trans-unit>
+            <trans-unit id="home.language">
+                <source>home.language</source>
+                <target>Language</target>
+            </trans-unit>
+            <trans-unit id="home.feel_contact">
+                <source>home.feel_contact</source>
+                <target>Feel free to contact me</target>
+            </trans-unit>
+            <trans-unit id="home.address">
+                <source>home.address</source>
+                <target>Address</target>
+            </trans-unit>
+            <trans-unit id="home.phone">
+                <source>home.phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="home.email">
+                <source>home.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="home.send_contact">
+                <source>home.send_contact</source>
+                <target>send</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

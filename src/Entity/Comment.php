@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use function Symfony\Component\String\u;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'blog_comment')]
+#[ORM\Table(name: 'blog_post_comment')]
 class Comment
 {
     #[ORM\Id]

@@ -287,6 +287,38 @@
                 <source>menu.admin</source>
                 <target>Admin</target>
             </trans-unit>
+            <trans-unit id="menu.about">
+                            <source>menu.about</source>
+                            <target>À propos</target>
+                        </trans-unit>
+                        <trans-unit id="menu.skills">
+                            <source>menu.skills</source>
+                            <target>Compétences</target>
+                        </trans-unit>
+                        <trans-unit id="menu.project">
+                            <source>menu.project</source>
+                            <target>Projet</target>
+                        </trans-unit>
+                        <trans-unit id="menu.experience">
+                             <source>menu.experience</source>
+                             <target>Experience</target>
+                        </trans-unit>
+                        <trans-unit id="menu.language">
+                              <source>menu.language</source>
+                              <target>Language</target>
+                        </trans-unit>
+                        <trans-unit id="menu.hobby">
+                              <source>menu.hobby</source>
+                              <target>Hobby</target>
+                        </trans-unit>
+                        <trans-unit id="menu.blog">
+                               <source>menu.blog</source>
+                               <target>Blog</target>
+                        </trans-unit>
+                        <trans-unit id="menu.contact">
+                               <source>menu.contact</source>
+                               <target>Contact</target>
+                        </trans-unit>
             <trans-unit id="menu.user">
                 <source>menu.user</source>
                 <target>Compte</target>
@@ -437,6 +469,38 @@
             <trans-unit id="paginator.next">
                 <source>paginator.next</source>
                 <target>Suivant</target>
+            </trans-unit>
+            <trans-unit id="home.basic_information">
+                <source>home.basic_information</source>
+                <target>Basic Information</target>
+            </trans-unit>
+            <trans-unit id="home.birthday">
+                <source>home.birthday</source>
+                <target>BIRTHDAY</target>
+            </trans-unit>
+            <trans-unit id="home.language">
+                <source>home.language</source>
+                <target>Language</target>
+            </trans-unit>
+            <trans-unit id="home.feel_contact">
+                <source>home.feel_contact</source>
+                <target>Feel free to contact me</target>
+            </trans-unit>
+            <trans-unit id="home.address">
+                <source>home.address</source>
+                <target>Address</target>
+            </trans-unit>
+            <trans-unit id="home.phone">
+                <source>home.phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="home.email">
+                <source>home.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="home.send_contact">
+                <source>home.send_contact</source>
+                <target>send</target>
             </trans-unit>
         </body>
     </file>

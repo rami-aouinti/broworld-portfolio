@@ -22,7 +22,7 @@
 		}
 	],
 	"require": {
-		"php": "^8.2.0",
+		"php": "^8.1.0",
 		"ext-amqp": "*",
 		"ext-ctype": "*",
 		"ext-iconv": "*",
@@ -86,18 +86,18 @@
 		"symfony/twig-bundle": "<3.3"
 	},
 	"require-dev": {
-		"dama/doctrine-test-bundle": "^7.0",
 		"bamarni/composer-bin-plugin": "^1.8",
+		"dama/doctrine-test-bundle": "^7.0",
 		"doctrine/doctrine-fixtures-bundle": "^3.4",
-		"systemsdk/easy-log-bundle": "2.0.*",
 		"roave/security-advisories": "dev-latest",
 		"symfony/browser-kit": "6.3.*",
 		"symfony/debug-bundle": "6.3.*",
 		"symfony/maker-bundle": "^1.51",
-		"symfony/requirements-checker": "^2.0",
+		"symfony/requirements-checker": "*",
 		"symfony/stopwatch": "6.3.*",
 		"symfony/var-dumper": "6.3.*",
-		"symfony/web-profiler-bundle": "6.3.*"
+		"symfony/web-profiler-bundle": "6.3.*",
+		"systemsdk/easy-log-bundle": "2.0.*"
 	},
 	"replace": {
 		"symfony/polyfill-ctype": "*",
@@ -109,7 +109,7 @@
 	"config": {
 		"allow-plugins": true,
 		"platform": {
-			"php": "8.2.0"
+			"php": "8.1.0"
 		},
 		"preferred-install": {
 			"*": "dist"
