@@ -1,0 +1,9 @@
+<h5>{{ 'menu.cetifications'|trans|upper }}</h5>
+<br><br>
+<ul>
+    {% for certification in certifications %}
+        <li>
+            {{ certification.name }}
+        </li>
+    {% endfor %}
+</ul>

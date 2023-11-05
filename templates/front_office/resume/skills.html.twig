@@ -1,0 +1,8 @@
+<h4>{{ 'menu.skills'|trans|upper }}</h4>
+<br><br>
+<ul>
+    {% for skill in skills %}
+        <li>{{ skill.name }}</li>
+        <h6></h6>
+    {% endfor %}
+</ul>

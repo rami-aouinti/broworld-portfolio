@@ -5,7 +5,7 @@
 {% block body %}
     <h1>{{ 'title.edit_post'|trans({'id': post.id}) }}</h1>
 
-    {{ include('admin/blog/_form.html.twig', {
+    {{ include('back_office/blog/_form.html.twig', {
         form: form,
         button_label: 'action.save'|trans,
         include_back_to_home_link: true,
@@ -20,7 +20,7 @@
     </div>
 
     <div class="section actions">
-        {{ include('admin/blog/_delete_form.html.twig', {post: post}, with_context = false) }}
+        {{ include('back_office/blog/_delete_form.html.twig', {post: post}, with_context = false) }}
     </div>
 
     {{ parent() }}

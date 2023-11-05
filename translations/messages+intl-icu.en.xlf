@@ -295,6 +295,10 @@
                 <source>menu.skills</source>
                 <target>Skills</target>
             </trans-unit>
+            <trans-unit id="menu.certifications">
+                <source>menu.certifications</source>
+                <target>Certifications</target>
+            </trans-unit>
             <trans-unit id="menu.project">
                 <source>menu.project</source>
                 <target>Project</target>

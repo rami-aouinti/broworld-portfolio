@@ -9,34 +9,34 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card-body">
-                                        <form action="https://formspree.io/rami.aouinti@gmail.com" method="POST">
+                                        <form role="form" id="contact-form" method="post" autocomplete="off">
+                                            {{ form_start(form) }}
                                             <div class="p pb-3"><strong>{{ 'home.feel_contact'|trans }}</strong></div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <div class="input-group"><span class="input-group-addon"><i class="fa fa-user-circle"></i></span>
-                                                        <input class="form-control" type="text" name="name" placeholder="Name" required="required"/>
+                                                        {{ form_widget(form.firstName) }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
-                                                    <div class="input-group"><span class="input-group-addon"><i class="fa fa-file-text"></i></span>
-                                                        <input class="form-control" type="text" name="Subject" placeholder="Subject" required="required"/>
+                                                    <div class="input-group"><span class="input-group-addon"><i class="fa fa-user-circle"></i></span>
+                                                        {{ form_widget(form.lastName) }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                                        <input class="form-control" type="email" name="_replyto" placeholder="E-mail" required="required"/>
+                                                        {{ form_widget(form.email) }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <textarea class="form-control" name="message" placeholder="Your Message" required="required"></textarea>
-                                                    </div>
+                                                        {{ form_widget(form.message) }}                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -44,6 +44,7 @@
                                                     <button class="btn btn-primary" type="submit">Send</button>
                                                 </div>
                                             </div>
+                                            {{ form_end(form) }}
                                         </form>
                                     </div>
                                 </div>

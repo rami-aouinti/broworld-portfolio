@@ -15,7 +15,6 @@
         <link href="{{ asset('portfolio/css/aos.css?ver=1.1.0') }}" rel="stylesheet">
         <link href="{{ asset('portfolio/css/bootstrap.min.css?ver=1.1.0') }}" rel="stylesheet">
         <link href="{{ asset('portfolio/css/main.css?ver=1.1.0') }}" rel="stylesheet">
-        <link href="{{ asset('portfolio/css/resume.css') }}" rel="stylesheet">
         <noscript>
             <style type="text/css">
                 [data-aos] {
@@ -26,6 +25,7 @@
         </noscript>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block javascripts %}
+            <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>

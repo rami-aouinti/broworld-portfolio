@@ -1,10 +1,9 @@
 homepage:
     path: /{_locale}
-    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    controller: App\Controller\FrontOffice\HomeController
     requirements:
         _locale: '%app_locales%'
     defaults:
-        template: front_office/home.html.twig
         _locale: '%locale%'
 
 controllers:

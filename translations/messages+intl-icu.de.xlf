@@ -295,6 +295,10 @@
                 <source>menu.skills</source>
                 <target>FÄHIGKEITEN</target>
             </trans-unit>
+            <trans-unit id="menu.certifications">
+                <source>menu.certifications</source>
+                <target>Fortbildungen Zertifizierun</target>
+            </trans-unit>
             <trans-unit id="menu.project">
                 <source>menu.project</source>
                 <target>Projekten</target>
@@ -302,6 +306,10 @@
             <trans-unit id="menu.experience">
                  <source>menu.experience</source>
                  <target>Erfahrungen</target>
+            </trans-unit>
+            <trans-unit id="menu.education">
+                 <source>menu.education</source>
+                 <target>Bildung</target>
             </trans-unit>
             <trans-unit id="menu.language">
                   <source>menu.language</source>

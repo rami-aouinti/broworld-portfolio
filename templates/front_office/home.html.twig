@@ -4,6 +4,11 @@
     <div class="page-content">
         <div>
             {% include 'front_office/sections/profile.html.twig' %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
             {% include 'front_office/sections/about.html.twig' %}
             {% include 'front_office/sections/skill.html.twig' %}
             {% include 'front_office/sections/portfolio.html.twig' %}

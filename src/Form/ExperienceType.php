@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ExperienceType extends AbstractType
 {
@@ -18,7 +19,13 @@ class ExperienceType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('description', null, [
+                'attr' => [
+                    'rows' => 20,
+                ],
+                'help' => 'help.post_content',
+                'label' => 'label.content',
+            ])
             ->add('company', TextType::class)
             ->add('startedAt', DateType::class, [
                 'label' => 'Start',

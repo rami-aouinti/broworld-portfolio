@@ -1,0 +1,89 @@
+<style>
+    h1 {
+        font-family: times;
+        color: #0a0a0a;
+        font-size: 28pt;
+    }
+    h3 {
+        font-family: times;
+        color: #0a0a0a;
+        font-size: 18pt;
+    }
+    h4 {
+        font-family: times;
+        color: #16305d;
+        font-size: 14pt;
+    }
+
+    h5 {
+        font-family: times;
+        color: #0a0a0a;
+        font-size: 12pt;
+    }
+
+    h6 {
+        font-family: times;
+        color: #0a0a0a;
+        font-size: 11pt;
+    }
+
+    li {
+        text-decoration-color: #0a0a0a;
+        color: #0a0a0a;
+        font-size: 11px;
+    }
+
+    img {
+        width: 150px;
+    }
+
+    p.first {
+        color: #000000;
+        font-family: helvetica;
+        font-size: 12pt;
+    }
+    p.first span {
+        color: #020202;
+        font-style: italic;
+    }
+    p#second {
+        color: rgb(00,63,127);
+        font-family: times;
+        font-size: 12pt;
+        text-align: justify;
+    }
+    table.first {
+        color: #030303;
+        font-family: helvetica;
+        font-size: 8pt;
+        background-color: #e0dddd;
+    }
+
+    div.test {
+        color: #CC0000;
+        font-family: helvetica;
+        font-size: 10pt;
+        border-style: solid solid solid solid;
+        border-color: green #FF00FF blue red;
+        text-align: center;
+    }
+</style>
+<table class="first" cellpadding="4" cellspacing="6">
+    {% include "front_office/resume/header.html.twig" %}
+    <tr>
+
+        <td width="250" height="1750"  bgcolor="#cccccc" color="#cccccc" style="text-decoration-color: #0a0a0a">
+            {% include "front_office/resume/information.html.twig" %}
+            {% include "front_office/resume/contact.html.twig" %}
+            {% include "front_office/resume/skills.html.twig" %}
+            {% include "front_office/resume/languages.html.twig" %}
+            {% include "front_office/resume/hobbies.html.twig" %}
+        </td>
+        <td width="470" height="1750">
+            {% include "front_office/resume/experience.html.twig" %}
+            {% include "front_office/resume/education.html.twig" %}
+            {% include "front_office/resume/certification.html.twig" %}
+        </td>
+
+    </tr>
+</table>

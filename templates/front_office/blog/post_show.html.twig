@@ -35,7 +35,7 @@
 
                 <div id="post-add-comment" class="jumbotron">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        {{ render(controller('App\\Controller\\BlogController::commentForm', {'id': post.id})) }}
+                        {{ render(controller('App\\Controller\\FrontOffice\\BlogController::commentForm', {'id': post.id})) }}
                     {% else %}
                         <p>
                             <a class="btn btn-success" href="{{ path('security_login', {'redirect_to': app.request.pathInfo}) }}">

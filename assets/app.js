@@ -23,7 +23,7 @@ import './js/flatpicker';
 import 'popper.js';
 
 import moment from 'moment';
-
+var converter = new showdown.Converter();
 moment.locale("fr_FR");
 
 $.getJSON("/api/user", user => {
@@ -75,6 +75,7 @@ $.getJSON("/api/skills", skills => {
 
 $.getJSON("/api/experiences", experiences => {
     experiences.forEach(experience => {
+        var description = converter.makeHtml(experience.description);
         $("#userExperiences").append(`
 <div class="card">
             <div class="row">
@@ -87,7 +88,7 @@ $.getJSON("/api/experiences", experiences => {
                 <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
                     <div class="card-body">
                         <div class="h5">${experience.title}</div>
-                        <p>${experience.description}</p>
+                         ${description}
                     </div>
                 </div>
             </div>
